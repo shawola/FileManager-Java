@@ -1,4 +1,4 @@
-name: Java CI with Maven
+herename: Java CI with Maven
 
 on:
   push:
@@ -10,11 +10,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+
     - name: Build with Maven
       run: mvn clean package
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: FileManager-App
+        path: target/*.jar
